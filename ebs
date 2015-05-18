@@ -1,4 +1,5 @@
 #!/bin/bash
+# This script is licenced under GPLv2 ; you can get your copy from http://www.gnu.org/licenses/gpl-2.0.html
 # Utility tool to Startup and Shutdown EBS
 # Edit <INSTALLATION_DIR> , <SID> , <HOSTNAME> before running script.
 # Store menu options selected by the user
