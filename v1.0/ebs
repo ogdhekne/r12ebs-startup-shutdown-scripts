@@ -1,7 +1,8 @@
 #!/bin/bash
 # This script is licenced under GPLv2 ; you can get your copy from http://www.gnu.org/licenses/gpl-2.0.html
 # Utility tool to Startup and Shutdown EBS
-# Edit <INSTALLATION_DIR> , <SID> , <HOSTNAME> before running script.
+# (c) Omkar Dhekne
+# Edit $DIR , $SID , $HOST  before running script.
 # Store menu options selected by the user
 INPUT=/tmp/menu.sh.$$
  
@@ -23,22 +24,27 @@ function display_output(){
 	local t=${3-Output} 	# box title 
 	dialog --backtitle "Startup/Shutdown script for EBS" --title "${t}" --clear --msgbox "$(<$OUTPUT)" ${h} ${w}
 }
+# Env:
+DIR=""
+SID=""
+HOST=""
+
 #
 # Purpose - Startup EBS
 #
 function startup(){
 str(){
 #db:
-cd <INSTALLATION_DIR>/oracle/<SID>/db/tech_st/11.1.0
-. <SID>_<HOSTNAME>.env
-cd <INSTALLATION_DIR>/oracle/<SID>/db/tech_st/11.1.0/appsutil/scripts/<SID>_<HOSTNAME>
-./addlnctl.sh start <SID>
+cd $DIR/oracle/$SID/db/tech_st/11.1.0
+. $SID\_$HOST.env
+cd $DIR/oracle/$SID/db/tech_st/11.1.0/appsutil/scripts/$SID_\$HOST
+./addlnctl.sh start $SID
 ./addbctl.sh start
 
 #apps:
-cd <INSTALLATION_DIR>/oracle/<SID>/apps/apps_st/appl
-. APPS<SID>_<HOSTNAME>.env
-cd <INSTALLATION_DIR>/oracle/<SID>/inst/apps/<SID>_<HOSTNAME>/admin/scripts
+cd $DIR/oracle/$SID/apps/apps_st/appl
+. APPS$SID\_$HOST.env
+cd $DIR/oracle/$SID/inst/apps/$SID\_$HOST/admin/scripts
 ./adstrtal.sh apps/apps
 }
 
@@ -51,16 +57,16 @@ display_output 20 65 "Startup EBS (Press UP/DOWN Arrow key to Scroll)"
 function shutdown(){
 stp(){
 #apps:
-cd <INSTALLATION_DIR>/oracle/<SID>/apps/apps_st/appl
-. APPS<SID>_<HOSTNAME>.env
-cd <INSTALLATION_DIR>/oracle/<SID>/inst/apps/<SID>_<HOSTNAME>/admin/scripts
+cd $DIR/oracle/$SID/apps/apps_st/appl
+. APPS$SID\_$HOST.env
+cd $DIR/oracle/$SID/inst/apps/$SID\_$HOST/admin/scripts
 ./adstpall.sh apps/apps
 
 #db:
-cd <INSTALLATION_DIR>/oracle/<SID>/db/tech_st/11.1.0
-. <SID>_<HOSTNAME>.env
-cd <INSTALLATION_DIR>/oracle/<SID>/db/tech_st/11.1.0/appsutil/scripts/<SID>_<HOSTNAME>
-./addlnctl.sh stop <SID>
+cd $DIR/oracle/$SID/db/tech_st/11.1.0
+. $SID\_$HOST.env
+cd $DIR/oracle/$SID/db/tech_st/11.1.0/appsutil/scripts/$SID\_$HOST
+./addlnctl.sh stop $SID
 ./addbctl.sh stop
 }
 
