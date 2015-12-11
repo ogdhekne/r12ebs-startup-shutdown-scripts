@@ -4,23 +4,23 @@ These scripts are created for Startup and Shutdown of Oracle Oracle E-Business S
 
 ### Version 1.1
 
-![Alt text](relative/path/to/img.jpg?raw=true "EBS-Profile Form")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.1/image1.png "EBS-Profile Form")
 
-![Alt text](relative/path/to/img.jpg?raw=true "EBS-Profile Created")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.1/image2.png "EBS-Profile Created")
 
-![Alt text](relative/path/to/img.jpg?raw=true "Main-Menu")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.1/image3.png "Main-Menu")
 
-![Alt text](relative/path/to/img.jpg?raw=true "Status while action")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.1/image4.png "Status while action")
 
-![Alt text](relative/path/to/img.jpg?raw=true "Check realtime status of Apps-DB Services")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.1/image5.png "Check realtime status of Apps-DB Services")
 
-![Alt text](relative/path/to/img.jpg?raw=true "Status")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.1/image6.png "Status")
 
 
 ### Version 1.0
 
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.0/image1.png "Main-Menu")
 
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.0/image2.png "While action")
 
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.0/image3.png "Status-log")
