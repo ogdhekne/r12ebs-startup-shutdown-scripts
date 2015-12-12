@@ -1,7 +1,7 @@
-# r12ebs
-Scripts for Oracle E-Business Suite.
-These scripts are created for Startup and Shutdown of Oracle Oracle E-Business Suite. 
 
+### Scripts for Oracle E-Business Suite.
+##### These scripts are created for Startup and Shutdown of Oracle Oracle E-Business Suite. 
+note: Scripts tested on version R12.1.1
 ### Version 1.1
 
 ![Alt text](https://github.com/ogdhekne/r12ebs/blob/master/images/v1.1/image1.png "EBS-Profile Form")
