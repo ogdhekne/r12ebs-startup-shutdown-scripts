@@ -23,6 +23,7 @@ dialog                                             \
     host=`hostname -a`
     # The rest of the script goes here
 mkdir -p /home/oracle/.ebs/logs/
+touch /home/oracle/.ebs/logs/{start.log,stop.log}
 cp -r ./ebs-profile /home/oracle/.ebs/
 cat >> /home/oracle/.ebs/ebs-profile <<EOF
 export INSTALLATION_DIR="$dir1"
