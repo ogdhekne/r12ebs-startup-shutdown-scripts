@@ -1,0 +1,63 @@
+#!/bin/bash
+# This script is licenced under GPLv2 ; you can get your copy of licence from http://www.gnu.org/licenses/gpl-2.0.html
+# Utility tool to Startup and Shutdown EBS
+# (c) Omkar Dhekne
+# Script version: 1.2
+
+# Store menu options selected by the user
+INPUT=/tmp/menu.sh.$$
+
+# trap and delete temp files
+trap "rm $INPUT; exit" SIGHUP SIGINT SIGTERM
+
+# Source Environment
+source /home/oracle/.ebs/ebs-profile
+
+# Source Logs:
+source ./log-status.sh
+
+# Source Execution:
+source ./execute.sh
+
+# Form Environment
+source ./prebs.sh
+
+# MAIN-MENU
+mainmenu()
+{
+while true
+do
+dialog --clear  --help-button --backtitle "Oracle Applications R12 - Startup/Shutdown Script" \
+--title "[ M A I N - M E N U ]" \
+--menu "This program is distributed in the hope that it will be useful, \n\
+but WITHOUT ANY WARRANTY; without even the implied warranty of \n\
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n\
+GNU General Public License for more details." 15 68 4	 \
+Startup "Startup of Apps-DB node." \
+Shutdown "Shutdown of Apps-DB node." \
+Status "Check realtime status of Apps-DB Services." \
+Exit "Exit to the shell" 2>"${INPUT}"
+
+menuitem=$(<"${INPUT}")
+
+# make decsion
+case $menuitem in
+	Startup) start;;
+	Shutdown) stop;;
+	Status) status;;
+	Exit) echo "Bye"; break;;
+esac
+done
+
+# if temp files found, delete em
+[ -f $INPUT ] && rm $INPUT
+}
+
+# check user and env. file
+{
+test "`whoami`" != 'oracle' && (whiptail --title "User check" --backtitle
+"Oracle Applications R12 - Startup/Shutdown Script" --msgbox "Please Login
+via user 'oracle' to execute this script"  7 60 ; exit 1)
+
+[ -f /home/oracle/.ebs/ebs-profile ] && mainmenu || form
+}

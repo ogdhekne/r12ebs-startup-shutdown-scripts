@@ -1,0 +1,46 @@
+#!/bin/bash
+# This script is licenced under GPLv2 ; you can get your copy of licence from http://www.gnu.org/licenses/gpl-2.0.html
+# Utility tool to Startup and Shutdown EBS
+# (c) Omkar Dhekne
+# Script version: 1.2
+
+# Environment variables:
+export Reset='\x1b[0m'
+export Bold_Red='\x1b[1;31m'
+export Bold_Green='\x1b[1;32m'
+export Bold_Purple='\x1b[1;35m'
+export startlog="/home/oracle/.ebs/logs/start.log"
+export stoplog="/home/oracle/.ebs/logs/stop.log"
+
+# Status-Logs
+export startlogfile="$(stat -c %Y $startlog)"
+export stoplogfile="$(stat -c %Y $stoplog)"
+
+# Status-Logs
+#startup
+export o1="$(echo `grep -i addlnctl.sh: $startlog | awk '{print $5}'`)"
+export o2="$(echo `grep -i addbctl.sh: $startlog | awk '{print $5}'`)"
+export o3="$(echo `grep -i adopmnctl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o4="$(echo `grep -i adalnctl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o5="$(echo `grep -i adapcctl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o6="$(echo `grep -i adoacorectl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o7="$(echo `grep -i adformsctl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o8="$(echo `grep -i adoafmctl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o9="$(echo `grep -i adcmctl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o10="$(echo `grep -i jtffmctl.sh: $startlog | awk  'NR==1{print $5}'`)"
+export o11="$(echo `grep -i  adstrtal.sh: $startlog | awk  'NR==1{print $5}'`)"
+
+#shutdown
+export i1="$(echo `grep -i jtffmctl.sh: $stoplog | awk '{print $5}'`)"
+export i2="$(echo `grep -i adcmctl.sh: $stoplog | awk 'NR==1{print $5}'`)"
+export i3="$(echo `grep -i adoafmctl.sh: $stoplog | awk 'NR==1{print $5}'`)"
+export i4="$(echo `grep -i adformsctl.sh: $stoplog | awk 'NR==1{print $5}'`)"
+export i5="$(echo `grep -i adoacorectl.sh: $stoplog | awk 'NR==1{print $5}'`)"
+export i6="$(echo `grep -i adapcctl.sh: $stoplog | awk 'NR==1{print $5}'`)"
+export i7="$(echo `grep -i adalnctl.sh: $stoplog | awk 'NR==1{print $5}'`)"
+export i8="$(echo `grep -i adopmnctl.sh: $stoplog | awk 'NR==1{print $5}'`)"
+export i9="$(echo `grep -i adstpall.sh: $stoplog  | awk 'NR==1{print $4}'`)"
+export i10="$(echo `grep -i addlnctl.sh: $stoplog  | awk '{print $5}'`)"
+export i11="$(echo `grep -i addbctl.sh: $stoplog  | awk '{print $5}'`)"
+
+# IMP Environment
