@@ -1,8 +1,10 @@
 #!/bin/bash
-# This script is licenced under GPLv2 ; you can get your copy of licence from http://www.gnu.org/licenses/gpl-2.0.html
-# Utility tool to Startup and Shutdown EBS
-# (c) Omkar Dhekne
-# Script version: 1.2
+#------------------------------------------------------------------------------------------------------------------------#
+# This script is licenced under GPLv2 ; you can get your copy of licence from http://www.gnu.org/licenses/gpl-2.0.html   #
+# Utility tool to Startup and Shutdown EBS                                                                               #
+# (c) Omkar Dhekne                                                                                                       #
+# Script version: 1.2                                                                                                    #
+#------------------------------------------------------------------------------------------------------------------------#
 
 # Functions:
 form() # EBS-Profile form

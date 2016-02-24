@@ -1,0 +1,90 @@
+#!/bin/bash
+#-----------------------------------------------------------------------------------------------------------#
+# This script is licenced under GPLv2 ; you can get your copy from http://www.gnu.org/licenses/gpl-2.0.html #
+# Utility tool to Startup and Shutdown EBS                                                                  #
+# (c) Omkar Dhekne ; v1.0b                                                                                  #
+# * IMPORTANT: Set $BASE , $SID , $HOST  before running script.                                             #
+#-----------------------------------------------------------------------------------------------------------#
+
+
+# Store menu options selected by the user
+INPUT=/tmp/menu.sh.$$
+
+# trap and delete temp files
+trap "rm $INPUT; exit" SIGHUP SIGINT SIGTERM
+
+# Env:
+BASE=""
+SID=""
+HOST=""
+Yellow='\x1b[1;33m'
+Reset='\x1b[0m'
+
+#
+# Purpose - Startup EBS
+#
+function startup(){
+#db:
+source $BASE/db/tech_st/11.1.0/$SID\_$HOST.env
+$BASE/db/tech_st/11.1.0/appsutil/scripts/$SID\_$HOST/addlnctl.sh start $SID
+$BASE/db/tech_st/11.1.0/appsutil/scripts/$SID\_$HOST/addbctl.sh start
+
+#apps:
+source $BASE/apps/apps_st/appl/APPS$SID\_$HOST.env
+$BASE/inst/apps/$SID\_$HOST/admin/scripts/adstrtal.sh apps/apps
+echo ""
+echo -e "Press ${Yellow:-}[Enter]${Reset:-} to return main-menu."
+read enter
+}
+
+
+
+#
+# Purpose - Shutdown EBS
+#
+function shutdown(){
+#apps:
+source $BASE/apps/apps_st/appl/APPS$SID\_$HOST.env
+$BASE/inst/apps/$SID\_$HOST/admin/scripts/adstpall.sh apps/apps
+
+#db:
+source $BASE/db/tech_st/11.1.0/$SID\_$HOST.env
+$BASE/db/tech_st/11.1.0/appsutil/scripts/$SID\_$HOST/addlnctl.sh stop $SID
+$BASE/db/tech_st/11.1.0/appsutil/scripts/$SID\_$HOST/addbctl.sh stop
+echo ""
+echo -e "Press ${Yellow:-}[Enter]${Reset:-} to return main-menu."
+read enter
+}
+
+
+#
+# set infinite loop
+#
+while true
+do
+ 
+### display main menu ###
+dialog --clear  --help-button --backtitle "Startup/Shutdown script for EBS" \
+--title "[ M A I N - M E N U ]" \
+--menu "This program is distributed in the hope that it will be useful, \n\
+but WITHOUT ANY WARRANTY; without even the implied warranty of \n\
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n\
+GNU General Public License for more details." 15 68 4	 \
+Startup "Startup of Apps as well as DB node." \
+Shutdown "Shutdown of Apps as well as DB node." \
+Exit "Exit to the shell" 2>"${INPUT}"
+ 
+menuitem=$(<"${INPUT}")
+ 
+ 
+# make decsion 
+case $menuitem in
+	Startup) startup;;
+	Shutdown) shutdown;;
+	Exit) echo "Bye"; break;;
+esac
+ 
+done
+ 
+# if temp files found, delete em
+[ -f $INPUT ] && rm $INPUT
