@@ -1,4 +1,4 @@
-
+# This is deprecated repository, new repository with stable scripts for r12.1.x and r12.2.x are created at : https://github.com/ogdhekne/r12ebs-start-stop.git
 ### Scripts for Oracle E-Business Suite.
 ##### These scripts are created for Startup and Shutdown of Oracle Oracle E-Business Suite. 
 note: Scripts tested on version R12.1.1
